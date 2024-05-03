@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+
+// Hàm kiểm tra xem một số có phải là số chính phương hay không
+int is_chinh_phuong(int num) {
+    if (num < 0) {
+        return 0;
+    }
+    int sqrt_num = sqrt(num);
+    return sqrt_num * sqrt_num == num;
+}
+
+// Hàm đếm số lượng số chính phương nhỏ hơn n
+int dem_so_chinh_phuong(int n) {
+    int count = 0;
+    for (int i = 1; i < n; i++) {
+        if (is_chinh_phuong(i)) {
+            count++;
+        }
+    }
+    return count;
+}
+
+int main() {
+    // Khởi tạo bộ sinh số ngẫu nhiên
+    srand(time(NULL));
+
+    // Nhập số nguyên dương ngẫu nhiên từ 1 đến 99
+    int n = rand() % 99 + 1;
+    printf("So nguyen duong n: %d\n", n);
+
+    // Đếm và in ra các số chính phương nhỏ hơn n
+    printf("Cac so chinh phuong nho hon %d la:\n", n);
+    for (int i = 1; i < n; i++) {
+        if (is_chinh_phuong(i)) {
+            printf("%d ", i);
+        }
+    }
+    printf("\n");
+
+    // Đếm số lượng số chính phương nhỏ hơn n
+    int so_luong = dem_so_chinh_phuong(n);
+    printf("So luong so chinh phuong nho hon %d la: %d\n", n, so_luong);
+
+    return 0;
+}
